@@ -1,0 +1,265 @@
+
+.b {
+
+
+    color: #212529;
+}
+
+.navBack {
+    background-color: #163170;
+}
+
+.color {
+    background-color: #000f32;
+    color: white;
+    border: 1px #000f32 solid;
+}
+
+.c {
+    left: 1000px;
+    /* right: 0px; */
+    color:white;
+    gap:10px;
+    text-align: right;
+
+}
+
+.class {
+    padding: 10px;
+    margin-left: 50px;
+}
+
+.abc {
+    gap: 20px;
+  
+    margin-right: 50px;
+}
+
+.abc:hover{
+    color: #000f32;
+}
+
+.picture {
+    background-image: url("bg.jpg");
+   
+  background-color: grey;
+    height: 100vh;
+}
+
+.content {
+    position: relative;
+     margin-left:70px ;
+}
+.bold{
+    color: #000f32;
+    font-size:  85px;
+    padding-top: 30px;
+    margin-left:70px ;
+}
+.btn{
+    background-color: rgba(255, 255, 255, 0.521);
+    color: #000f32;
+    margin-left: 70px;
+ 
+     margin-top: 30px;
+
+}
+.btn:hover{
+    background-color: #000f32;
+    color: white;
+
+}
+.container1{
+    background-color: #000f32;
+    color: white;
+}
+.btn2{
+    height: 50px;
+    width: 150px;
+}
+.fixed{
+    position :sticky;
+    top: 0;
+    background-color: rgb(255, 255, 255) !important;
+    z-index: 1000;
+}
+.quotes{
+ background-color:  #001a57;
+ color:white;
+ height:60px;
+ width:170px;
+ margin-top: 50px;
+}
+.quotes:hover{
+    background-color:#000f32;
+}
+.backgroundimage{
+    background-image: url("2.jpg");
+    height:300px;
+
+
+}
+.provide{
+    color:white;
+}
+
+.services-cards{
+    /* border: 2px solid black ; */
+    width: 30%;
+    padding: 0 !important;
+}
+.services-cards:hover{
+    color:#001a57;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+.readmore{
+    color: #001a57;
+}
+    
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  /* background: #444; */
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+.img-hover:hover{
+    transition: all .4s ease-in-out;
+    scale: 1.03;
+}
+.Latestnews{
+    position:relative;
+}
+.date {
+    position: absolute;
+    bottom: 150px;
+    left: 10px;
+    background-color: #001a57;
+    color: white;
+    width: 150px;
+ 
+
+}
+.subscribe{
+    color:#001a57;
+    background-color: white;
+    border: none;
+}
+.subscribe:hover{
+    color:white;
+    background-color: #000f32;
+
+
+}
+.footer{
+    background-color: #001a57;
+    color:white;
+}
+.container2{
+       background-color: #001a57;
+
+}
+.input-name{
+    border: none;
+    background-color: transparent;
+    outline:  none;
+    color: rgb(189, 181, 181);
+    border-bottom: 2px solid rgb(156, 145, 145);
+    padding: 4px;
+}
+.class-name{
+      border: none;
+    background-color: transparent;
+    outline:  none;
+    /* color: rgba(255, 255, 255, 0.63); */
+    border-bottom: 2px solid rgba(192, 173, 173, 0.842);
+    padding: 20px;
+    color:#212529;
+    margin-left: 30px;
+   width: 100% ;
+
+}
+.class-name:focus{
+    border-color: rgb(34, 31, 255);
+}
+.quotess{
+    margin-left: 50px;
+    margin-top: 100px;
+    font-size: large;
+    width : 200px;
+    height:50px;
+}
+.smalldiv{
+    border-right: 5px solid rgba(143, 136, 136, 0.911) ;
+  
+}
+.smalldivv{
+     border-bottom:5px solid rgba(143, 136, 136, 0.911) ; 
+     width:50px;
+     }
+
+.herobg{
+    background-image: url("herobg.jpg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    background-attachment: fixed;
+    color: white;
+    position: relative;
+}
+.herobg::before{
+    content: "";
+    background-color: #b0c4f381;
+    position: absolute;
+    top: 0px;
+    right: 0px ;
+    left: 0px;
+    bottom: 0px;
+}
+
+.hello{
+    position: relative;
+}
+.smaldiv{
+      border-bottom:2px solid rgba(226, 218, 218, 0.993) ; 
+     width:300px;
+}
+.dive {
+    position: relative;
+    height:30px;
+    
+  
+}
+.admin{
+  border: none;
+    background-color: transparent;
+    outline:  none;
+  
+    border-bottom: 2px solid rgba(3, 3, 3, 0.842);
+    padding: 20px;
+    color:#212529;
+    margin-left: 200px;
+   width: 50% ;
+}
