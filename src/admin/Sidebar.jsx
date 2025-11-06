@@ -4,7 +4,7 @@ function Sidebar() {
   return (
     <>
 
-      <div className="col-md-4 p-2 mt-5 bg-success">
+      <div className="col-md-4 p-2 mt-5 bg-success fixed" >
         <ul>
           <h5 className=" p-2 pt-5 " >
             <i class="fa-solid fa-grip"></i>
