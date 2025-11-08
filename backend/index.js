@@ -3,7 +3,9 @@ let cors = require("cors")
 let mongoose = require("mongoose")
 let app = express()
 let bcrypt = require("bcrypt")
-app.use(cors())
+app.use(cors({
+    origin : ["http://localhost:5173" , "https://first-project-zdcw.vercel.app/"], 
+}))
 app.use(express.json())
 
 app.get("/", (req, res) => {
@@ -365,7 +367,7 @@ app.put("/api/Blogupdate/:id" , async (req ,res) => {
     try {
        let _id =   req.params.id
        let data =  req.body
-    
+
         await AddBlog.findOneAndUpdate({_id},data  )
        res.status(200).json({msg : "blog Update"})
         
@@ -376,6 +378,7 @@ app.put("/api/Blogupdate/:id" , async (req ,res) => {
 })
 
 mongoose.connect("mongodb://127.0.0.1:27017/project")
+// mongoose.connect("mongodb+srv://Yashika:#yashika@1905@cluster0.76q5azn.mongodb.net/?appName=Cluster0")
     .then(() => {
         app.listen(4001, () => {
             console.log("server start !");
