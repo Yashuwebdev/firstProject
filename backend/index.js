@@ -377,8 +377,8 @@ app.put("/api/Blogupdate/:id" , async (req ,res) => {
     }
 })
 
-mongoose.connect("mongodb://127.0.0.1:27017/project")
-// mongoose.connect("mongodb+srv://Yashika:#yashika@1905@cluster0.76q5azn.mongodb.net/?appName=Cluster0")
+// mongoose.connect("mongodb://127.0.0.1:27017/project")
+mongoose.connect("mongodb+srv://yashikakargwal19_db_user:ctxsVbeb4T8ypyX7@cluster0.yc5aike.mongodb.net/project")
     .then(() => {
         app.listen(4000, () => {
             console.log("server start !");
