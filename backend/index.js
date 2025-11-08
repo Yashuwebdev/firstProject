@@ -380,7 +380,7 @@ app.put("/api/Blogupdate/:id" , async (req ,res) => {
 mongoose.connect("mongodb://127.0.0.1:27017/project")
 // mongoose.connect("mongodb+srv://Yashika:#yashika@1905@cluster0.76q5azn.mongodb.net/?appName=Cluster0")
     .then(() => {
-        app.listen(4001, () => {
+        app.listen(4000, () => {
             console.log("server start !");
         });
     })

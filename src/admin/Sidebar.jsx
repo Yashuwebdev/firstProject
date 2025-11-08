@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 function Sidebar() {
   return (
-    <>
-
-      <div className="col-md-4 p-2 mt-5 bg-success fixed" >
+      <div className="col-md-4 p-2 mt-5 fixe  " >
         <ul>
           <h5 className=" p-2 pt-5 " >
             <i class="fa-solid fa-grip"></i>
@@ -50,7 +48,7 @@ function Sidebar() {
 
       </div>
 
-    </>
+  
 
 
   )
