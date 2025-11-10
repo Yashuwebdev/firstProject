@@ -3,6 +3,7 @@ let cors = require("cors")
 let mongoose = require("mongoose")
 let app = express()
 let bcrypt = require("bcrypt")
+let PORT = 4001
 app.use(cors({
     origin : ["http://localhost:5173" , "https://first-project-zdcw.vercel.app/"], 
 }))
@@ -375,7 +376,7 @@ app.put("/api/Blogupdate/:id" , async (req ,res) => {
 // mongoose.connect("mongodb://127.0.0.1:27017/project")
 mongoose.connect("mongodb+srv://yashikakargwal19_db_user:ctxsVbeb4T8ypyX7@cluster0.yc5aike.mongodb.net/project")
     .then(() => {
-        app.listen(4001, () => {
+        app.listen(PORT, () => {
             console.log("server start !");
         });
     })
