@@ -1,12 +1,13 @@
 
 import { Link } from "react-router-dom";
 import Hero from "../Components/Hero"
+import { BACKEND_API } from "../backendAPI";
 import { useState, useEffect } from "react";
 function Blog() {
     let [ViewBlog, setViewBlog] = useState([])
     async function getBlog() {
         try {
-            let res = await fetch("http://localhost:4001/api/ViewBlog");
+            let res = await fetch(`${BACKEND_API}/api/ViewBlog`);
             let data = await res.json();
             console.log(data)
             setViewBlog(data.ViewBlog);

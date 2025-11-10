@@ -1,8 +1,10 @@
 import React, { use, useEffect, useState } from "react";
+import { BACKEND_API } from "../backendAPI";
+
 function Dashboard() { 
 let  [dataCount , setDataCount] = useState({})
   useEffect(()=>{
-      fetch("http://localhost:4001/api/getno")
+      fetch(`${BACKEND_API}/api/getno`)
       .then((res) =>  res.json())
       .then(data =>setDataCount(data))
       .catch(error => console.log(error))

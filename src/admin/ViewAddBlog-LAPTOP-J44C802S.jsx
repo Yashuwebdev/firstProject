@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { BACKEND_API } from "../backendAPI";
+
 function ViewAddBlog() {
     let [ViewBlog, setViewBlog] = useState([])
     async function getBlog() {
         try {
-            let res = await fetch("http://localhost:4001/api/ViewBlog");
+            let res = await fetch(`${BACKEND_API}/api/ViewBlog`);
             let data = await res.json();
             console.log(data)
             setViewBlog(data.ViewBlog);
@@ -21,7 +23,7 @@ function ViewAddBlog() {
 
     async function deleteBlog(id) {
         try {
-            let res = await fetch(`http://localhost:4001/api/deleteBlog/${id}`, {
+            let res = await fetch(`${BACKEND_API}/api/deleteBlog/${id}`, {
                 method: "delete",
             });
             let data = await res.json();

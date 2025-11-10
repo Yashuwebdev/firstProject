@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { BACKEND_API } from "../backendAPI";
+
 function ViewServices() {
     let [ViewServices, setViewServices] = useState([])
     async function getServices() {
         try {
-            let res = await fetch("http://localhost:4001/api/ViewServices");
+            let res = await fetch(`${BACKEND_API}/api/ViewServices`);
             let data = await res.json();
             console.log(data)
             setViewServices(data.ViewServices);
@@ -21,7 +23,7 @@ function ViewServices() {
 
     async function deleteServices(id) {
         try {
-            let res = await fetch(`http://localhost:4001/api/deleteServices/${id}`, {
+            let res = await fetch(`${BACKEND_API}/api/deleteServices/${id}`, {
                 method: "delete",
             });
             let data = await res.json();

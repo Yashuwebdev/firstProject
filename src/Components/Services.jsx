@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
+import { BACKEND_API } from "../backendAPI";
 
 
 function Services() {
     let [ViewServices, setViewServices] = useState([])
     async function getServices() {
         try {
-            let res = await fetch("http://localhost:4001/api/ViewServices");
+            let res = await fetch(`${BACKEND_API}/api/ViewServices`);
             let data = await res.json();
             console.log(data)
             setViewServices(data.ViewServices);

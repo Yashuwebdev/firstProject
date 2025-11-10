@@ -1,6 +1,7 @@
 import { useState  , useContext} from "react"
 import { useNavigate } from "react-router-dom"
 import { authContext } from "../Context/AuthContextProvider"
+import { BACKEND_API } from "../backendAPI"
 function Login() {
     let [email, setEmail] = useState("")
     let [password, setpassword] = useState("")
@@ -15,7 +16,7 @@ function Login() {
         }
 
 
-        let res = await fetch("http://localhost:4001/api/Login", {
+        let res = await fetch(`${BACKEND_API}/api/Login`, {
             method: "post",
             body: JSON.stringify({ email, password }),
             headers: {

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { authContext } from "../Context/AuthContextProvider";
+import { BACKEND_API } from "../backendAPI";
+
 function Bookingpage() {
     let navi =  useNavigate()
     let {islogin } =  useContext(authContext)
@@ -16,7 +18,7 @@ function Bookingpage() {
   async  function getdatabyId(){
         let userId =  localStorage.getItem("userId")
         if (userId) {
-            let res =  await fetch(`http://localhost:4001/api/getdatabyId/${userId}`, {method: "get",})
+            let res =  await fetch(`${BACKEND_API}/api/getdatabyId/${userId}`, {method: "get",})
             let data =  await res.json()
             setname(data.name)
             setemail(data.email)
@@ -33,7 +35,7 @@ function Bookingpage() {
     
     function submitBooking() {
        
-        fetch("http://localhost:4001/api/Bookingpage", {
+        fetch(`${BACKEND_API}/api/Bookingpage`, {
             method: "post",
             body: JSON.stringify({  title, selectservices, name, description ,bookingdate  , email}),
             headers: {

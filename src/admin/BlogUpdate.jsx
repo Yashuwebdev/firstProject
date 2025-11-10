@@ -1,5 +1,7 @@
  import { useState , useEffect } from "react"
  import { useParams } from "react-router-dom"
+import { BACKEND_API } from "../backendAPI"
+ 
 function BlogUpdate(){
     
      let [imgPath, setImgPath] = useState("")
@@ -12,7 +14,7 @@ function BlogUpdate(){
 
     async function getdataById() {
         try {
-            let res = await fetch(`http://localhost:4001/getdatabyId/${id}`)
+            let res = await fetch(`${BACKEND_API}/getdatabyId/${id}`)
             let data = await res.json()
             setImgPath(data.imgPath);
             setpostby(data.postby)
@@ -37,7 +39,7 @@ function BlogUpdate(){
             if (imgPath == "") {
                 return alert("add Images ! ")
             }
-            fetch("http://localhost:4001/api/Blogupdate/"+ id, {
+            fetch(`${BACKEND_API}/api/Blogupdate/`+ id, {
                 method: "put",
                 body: JSON.stringify({ imgPath, title, postby, poston, description}),
                 headers: {

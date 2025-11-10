@@ -1,5 +1,7 @@
 
 import React, { useState } from "react";
+import { BACKEND_API } from "../backendAPI";
+
 function AddBlog() {
     let [imgPath, setImgPath] = useState("")
     let [title, settitle] = useState("")
@@ -12,7 +14,7 @@ function AddBlog() {
         if (imgPath == "") {
             return alert("add Images ! ")
         }
-        fetch("http://localhost:4001/api/AddBlog", {
+        fetch(`${BACKEND_API}/api/AddBlog`, {
             method: "post",
             body: JSON.stringify({ imgPath, title, postby, poston, description }),
             headers: {

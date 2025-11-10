@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { BACKEND_API } from "../backendAPI";
+
 function ViewBookings() {
     let [ViewBooking, setViewBooking] = useState([])
     async function getBooking() {
         try {
-            let res = await fetch("http://localhost:4001/api/ViewBooking");
+            let res = await fetch(`${BACKEND_API}/api/ViewBooking`);
             let data = await res.json();
             console.log(data)
             setViewBooking(data.ViewBooking);
@@ -21,7 +23,7 @@ function ViewBookings() {
 
     async function deleteBooking(id) {
         try {
-            let res = await fetch(`http://localhost:4001/api/deleteBooking/${id}`, {
+            let res = await fetch(`${BACKEND_API}/api/deleteBooking/${id}`, {
                 method: "delete",
             });
             let data = await res.json();

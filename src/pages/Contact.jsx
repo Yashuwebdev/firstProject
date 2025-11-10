@@ -1,5 +1,7 @@
 import { useState } from "react"
 import Hero from "../Components/Hero"
+import { BACKEND_API } from "../backendAPI"
+
 function Contact() {
     let [name, setName] = useState("")
     let [email, setEmail] = useState("")
@@ -11,7 +13,7 @@ function Contact() {
         if (name == "") {
             return alert("Enter name ")
         }
-        fetch("http://localhost:4001/api/contact", {
+        fetch(`${BACKEND_API}/api/contact`, {
             method: "post",
             body: JSON.stringify({ name, email, contact, message, services }),
             headers: {
