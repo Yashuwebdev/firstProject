@@ -71,7 +71,7 @@ function AddServices() {
             {/* <input value={selectservices} onChange={(e) => { setselectservices(e.target.value) }} type="select" className="class-name mb-3" placeholder="Select Services "/> */}
              
             <input value={description} onChange={(e) => { setdescription(e.target.value) }} type="text" className="class-name mb-3" placeholder="Description "></input>
-            <button onClick={submitServices} className="quotes" > Add Services</button>
+            <button onClick={submitServices} className="quotes m-0 " > Add Services</button>
         </div>
 
 
