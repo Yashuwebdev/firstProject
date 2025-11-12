@@ -9,11 +9,7 @@ function Sidebar() {
             <Link to={""}>  DASHBOARD</Link>
 
           </h5>
-             <h5 className=" p-2 pt-5 " >
-            <i class="fa-solid fa-grip"></i>
-            <Link to={"../Contact"}>  Contact</Link>
-
-          </h5>
+        
           <h5 className=" p-2"   >
             <i class="fa-regular fa-user"></i>
             <Link to={"ViewContact"}> ViewContacts</Link>
@@ -38,12 +34,27 @@ function Sidebar() {
             <Link to={"AddServices"}> AddServices </Link>
           
 
-          </h5> <h5 className=" p-2">
+          </h5>
+            <h5 className=" p-2">
+            <i class="fa-regular fa-file-lines"></i>
+            <Link to={"ViewServices"}> ViewServices      </Link>
+          </h5>
+          
+           <h5 className=" p-2">
+            <i class="fa-regular fa-file-lines"></i>
+            <Link to={"AddProduct"}> AddProduct    </Link>
+          </h5>
+
+          <h5 className=" p-2">
 
             <i class="fa-regular fa-file-lines"></i>
-            <Link to={"ViewServices"}> ViewServices        </Link>
+            <Link to={"ViewProduct"}> ViewProduct       </Link>
         
           </h5>
+
+
+
+
         </ul>
 
       </div>

@@ -10,6 +10,7 @@ import ViewContact from "./admin/ViewContact"
 import AddBlog from "./admin/AddBlog"
 import ViewAddBlog from "./admin/ViewAddBlog"
 import AddServices from "./admin/AddServices"
+
 import ViewServices from "./admin/ViewServices"
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
@@ -20,6 +21,9 @@ import ViewBookings from "./admin/ViewBookings"
 import Dashboard from "./admin/Dashboard"
 import BlogDetails from "./Components/Blogdetails"
 import BlogUpdate from "./admin/BlogUpdate"
+import AddProduct from "./admin/AddProduct"
+import ViewProduct from "./admin/ViewProduct"
+import AllProduct from "./pages/AllProduct"
 
 function App() {
 
@@ -39,16 +43,21 @@ function App() {
                             <Route path="Signup" element={<Signup></Signup>}></Route>
                             <Route path="Login" element={<Login></Login>}></Route>
                             <Route path="Bookingpage" element={<Bookingpage></Bookingpage>}></Route>
+                            <Route path="allproduct" element={<AllProduct/>}></Route>
 
                         </Route>
 
                         <Route path="admin" element={<AdminLayout></AdminLayout>} >
                             <Route index element={<Dashboard></Dashboard>}></Route>
                             <Route path="viewContact" element={<ViewContact></ViewContact>}></Route>
-                            <Route path="addblog" element={<AddBlog />}></Route>
                             <Route path="viewAddBlog" element={<ViewAddBlog></ViewAddBlog>}></Route>
                             <Route path="viewServices" element={<ViewServices></ViewServices>}></Route>
+                            <Route path="ViewProduct" element={<ViewProduct></ViewProduct>}></Route>
+
                             <Route path="AddServices" element={<AddServices></AddServices>}></Route>
+                            <Route path="addblog" element={<AddBlog></AddBlog> }></Route>
+                            <Route path="AddProduct" element={<AddProduct></AddProduct> }></Route>
+
                             <Route path="ViewBookings" element={<ViewBookings></ViewBookings>}></Route>
                             <Route path="blog_update/:id" element={<BlogUpdate></BlogUpdate>}></Route>
                         </Route>

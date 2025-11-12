@@ -83,6 +83,41 @@ app.post("/api/AddBlog", async (req, res) => {
 })
 
 
+let AddProductSchema = mongoose.Schema({
+
+    imgPath: {
+        type: String,
+    },
+    title: {
+        type: String,
+        required: true,
+    },
+    prize: {
+        type: Number,
+    },
+   
+    description: {
+        type: String,
+    }
+
+})
+let AddProduct = mongoose.model("AddProduct", AddProductSchema);
+
+app.post("/api/AddProduct", async (req, res) => {
+    let data = req.body
+    console.log((data));
+
+    try {
+        await AddProduct.create(data)
+        res.status(200).json({ mes: "data save !" })
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({ mes: "server error !" })
+    }
+})
+
+
 let AddServicesSchema = mongoose.Schema({
     imgPath: {
         type: String,
@@ -167,6 +202,32 @@ app.delete("/api/deleteBlog/:id", async (req, res) => {
     try {
         await AddBlog.findOneAndDelete({ _id });
         res.status(200).json({ msg: "Delete Blog !" })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ mes: "Server Error" });
+    }
+})
+
+
+
+app.get("/api/ViewProduct", async (req, res) => {
+    
+    try {
+        let ViewProduct = await AddProduct.find()
+        res.status(200).json({ ViewProduct })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ msg: "Server Start" })
+
+    }
+}
+)
+
+app.delete("/api/deleteProduct/:id", async (req, res) => {
+    let _id = req.params.id;
+    try {
+        await AddProduct.findOneAndDelete({ _id });
+        res.status(200).json({ msg: "Delete Product !" })
     } catch (error) {
         console.log(error);
         res.status(500).json({ mes: "Server Error" });
