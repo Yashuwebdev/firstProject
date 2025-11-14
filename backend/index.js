@@ -5,7 +5,7 @@ let app = express()
 let bcrypt = require("bcrypt")
 let PORT = 4001
 app.use(cors({
-    origin : ["http://localhost:5173" , "https://first-project-zdcw.vercel.app/"], 
+    origin: ["http://localhost:5173", "https://first-project-zdcw.vercel.app/"],
 }))
 app.use(express.json())
 
@@ -88,14 +88,14 @@ let AddProductSchema = mongoose.Schema({
     imgPath: {
         type: String,
     },
-    title: {
+    Itemname: {
         type: String,
         required: true,
     },
     prize: {
         type: Number,
     },
-   
+
     description: {
         type: String,
     }
@@ -211,7 +211,7 @@ app.delete("/api/deleteBlog/:id", async (req, res) => {
 
 
 app.get("/api/ViewProduct", async (req, res) => {
-    
+
     try {
         let ViewProduct = await AddProduct.find()
         res.status(200).json({ ViewProduct })
@@ -340,6 +340,7 @@ let SignSchema = mongoose.Schema({
 
 })
 let Sign = mongoose.model("Sign", SignSchema);
+
 app.post("/api/sign", async (req, res) => {
     let data = req.body
 
@@ -420,19 +421,106 @@ app.get("/getdatabyId/:id", async (req, res) => {
     }
 })
 
-app.put("/api/Blogupdate/:id" , async (req ,res) => {
+app.put("/api/Blogupdate/:id", async (req, res) => {
     try {
-       let _id =   req.params.id
-       let data =  req.body
+        let _id = req.params.id
+        let data = req.body
 
-        await AddBlog.findOneAndUpdate({_id},data  )
-       res.status(200).json({msg : "blog Update"})
-        
+        await AddBlog.findOneAndUpdate({ _id }, data)
+        res.status(200).json({ msg: "blog Update" })
+
     } catch (error) {
-         console.log(error);
+        console.log(error);
         res.status(500).json({ mes: "server error !" })
     }
 })
+
+const cartschema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Sign",
+        required: true,
+    },
+    products: [
+        {
+            productId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Addproduct",
+            },
+            quantity: {
+                type: Number,
+                default: 1,
+            }
+        }
+    ]
+})
+
+let Cart = mongoose.model("Cart", cartschema);
+
+app.post("/api/cart/add", async (req, res) => {
+
+    let { userId, productId } = req.body
+
+
+    try {
+        let cart = await Cart.findOne({ userId });
+        if (!cart) {
+            cart = new Cart({ userId, products: [] });
+        }
+        const productIndex = cart.products.findIndex(
+            (p) => p.productId == productId
+        );
+        
+        
+        if (productIndex > -1) {
+            cart.products[productIndex].quantity += 1;
+        } else {
+            cart.products.push({ productId,});
+        }
+        await cart.save();
+
+        res.status(200).json({ success: true });
+    }
+    catch (error) {
+        console.log(error);
+
+        res.status(500).json({ error: error.message });
+    }
+
+});
+//  Get user cart
+router.get ("/:userId",async (req,res) =>{
+  try {
+    const cart =await Cart.findOne ({userId: req.params.userId }).populate(
+    "products.productId",
+    "productname mrp shortdescription pic1 , discount"
+  );
+  if (cart == null){
+    return res.status(200).json (cart.products);
+  }
+  res.status(200).json(cart.products);
+  } catch(error){ 
+    res.status(500).json({ error:error.message});
+  }
+}); 
+// Remove product from  cart
+router.delete("/:userId/:productId",async(req, res)=>{
+try {
+    const cart =await Cart.findOne ({ userId:req.params.userId});
+    cart.products =cart.products.filter(
+    (p) => p.productId.string () !== req.params.productId    
+    );
+    await cart.save();
+    res.json({ mes : "data delete !"});
+}
+catch(error){
+    res. status(500).json({ error:error.message });
+}
+});
+
+
+
+
 
 // mongoose.connect("mongodb://127.0.0.1:27017/project")
 mongoose.connect("mongodb+srv://yashikakargwal19_db_user:ctxsVbeb4T8ypyX7@cluster0.yc5aike.mongodb.net/project")

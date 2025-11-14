@@ -44,7 +44,7 @@ function ViewProduct() {
                 <th>Sr.No.</th> 
                 <th>Img</th>
                 
-                <th>title</th>
+                <th>Itemname</th>
               
                 
             
@@ -58,7 +58,7 @@ function ViewProduct() {
                         <td>{idx + 1}</td>
                          <td> <img src={c.imgPath}  width={100} alt="" /> </td>
                         
-                        <td>{c.title}</td>
+                        <td>{c.Itemname}</td>
                        <td>{c.prize}</td>
                         
                         <td>{c.description}</td>

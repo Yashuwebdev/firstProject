@@ -53,7 +53,7 @@ function Footer() {
                         <div class="col-md-3 ">
                             <h4><b>SOLUTIONS</b></h4>
                             <ul type="circle" class="p-3">
-                                <div class="p-2">
+                                <div class="p-4">
                                     <li >Travel And Aviation</li>
                                     <li>Travel And Aviation</li>
                                     <li>Travel And Aviation</li>
@@ -63,9 +63,9 @@ function Footer() {
                                 </div>
                             </ul>
                         </div>
-                        <div class="col-md-3  ">
+                        <div class="col-md-3 pl-3 ">
                             <h4><b>NEWSLETTER</b></h4>
-                            <div class="p-4">
+                            <div class="p-3 pt-5">
                                 <input type="text" className="input-name" placeholder="name*"></input>
 
                                 <input type="text" placeholder="email*" class="mt-3 input-name"></input>

@@ -24,6 +24,9 @@ import BlogUpdate from "./admin/BlogUpdate"
 import AddProduct from "./admin/AddProduct"
 import ViewProduct from "./admin/ViewProduct"
 import AllProduct from "./pages/AllProduct"
+import CartContextProvider from "./Context/CartContextProvider"
+import Viewcart from "./admin/ViewCart"
+
 
 function App() {
 
@@ -31,6 +34,9 @@ function App() {
         <>
             <BrowserRouter>
                 <AuthContextProvider>
+                    <CartContextProvider>
+
+                   
                     <Routes>
                         <Route path="/" element={<Layout></Layout>}>
                             <Route index element={<Home></Home>}></Route>
@@ -38,6 +44,8 @@ function App() {
                             <Route path="contact" element={<Contact></Contact>}></Route>
                             <Route path="Services" element={<Services></Services>}></Route>
                             <Route path="blog" element={<Blog></Blog>}></Route>
+                            <Route path="viewcart" element={<Viewcart></Viewcart>}></Route>
+
                             <Route path="blog/:idx" element={<BlogDetails></BlogDetails>}></Route>
                             <Route path="Adminlogin" element={<Adminlogin></Adminlogin>}></Route>
                             <Route path="Signup" element={<Signup></Signup>}></Route>
@@ -62,6 +70,7 @@ function App() {
                             <Route path="blog_update/:id" element={<BlogUpdate></BlogUpdate>}></Route>
                         </Route>
                     </Routes>
+                     </CartContextProvider>
                 </AuthContextProvider>
             </BrowserRouter>
 

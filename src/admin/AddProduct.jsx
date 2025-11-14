@@ -4,7 +4,7 @@ import { BACKEND_API } from "../backendAPI";
 
 function AddProduct() {
     let [imgPath, setImgPath] = useState("")
-    let [title, settitle] = useState("")
+    let [Itemname, setItemname] = useState("")
     let [prize, setprize] = useState("")
    
     let [description, setdescription] = useState("")
@@ -56,7 +56,7 @@ function AddProduct() {
         <div className="col-md-8 p-5 mt-5  bg-info"> 
             <h1 class="text-center p-2">ADD PRODUCTS</h1>
             <input type="file" onChange={handleImage} className="text-primary" />
-            <input value={title} onChange={(e) => { settitle(e.target.value) }} type="text" className="class-name mb-3" placeholder="Title"></input >
+            <input value={Itemname} onChange={(e) => { setItemname(e.target.value) }} type="text" className="class-name mb-3" placeholder="Item name "></input >
             <input value={prize} onChange={(e) => { setprize(e.target.value) }} type="number" className="class-name mb-3" placeholder="price"></input>
             <input value={description} onChange={(e) => { setdescription(e.target.value) }} type="text" className="class-name mb-3" placeholder="Description "></input>
             <button onClick={submitProduct} className="quotes" > Add Product</button>
