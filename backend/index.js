@@ -445,7 +445,7 @@ const cartschema = new mongoose.Schema({
         {
             productId: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "Addproduct",
+                ref: "AddProduct",
             },
             quantity: {
                 type: Number,
@@ -461,7 +461,6 @@ app.post("/api/cart/add", async (req, res) => {
 
     let { userId, productId } = req.body
 
-
     try {
         let cart = await Cart.findOne({ userId });
         if (!cart) {
@@ -470,55 +469,146 @@ app.post("/api/cart/add", async (req, res) => {
         const productIndex = cart.products.findIndex(
             (p) => p.productId == productId
         );
-        
-        
         if (productIndex > -1) {
             cart.products[productIndex].quantity += 1;
         } else {
-            cart.products.push({ productId,});
+            cart.products.push({ productId, });
         }
         await cart.save();
-
         res.status(200).json({ success: true });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    }
+
+});
+
+
+//  Get user cart
+app.get("/api/Viewcart/:userId", async (req, res) => {
+    try {
+        const cart = await Cart.findOne({ userId: req.params.userId }).populate("products.productId")
+        if (cart == null) {
+            return res.status(200).json(cart.products);
+        }
+        res.status(200).json(cart.products);
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+// Remove product from  cart
+app.delete("/api/Viewcart/:userId/:productId", async (req, res) => {
+    try {
+        console.log(req.params.productId);
+        const cart = await Cart.findOne({ userId: req.params.userId });
+        cart.products = cart.products.filter(
+            (p) => p.productId.toString() !== req.params.productId
+        );
+        await cart.save();
+        res.json({ mes: "data delete !" });
     }
     catch (error) {
         console.log(error);
 
         res.status(500).json({ error: error.message });
     }
-
-});
-//  Get user cart
-router.get ("/:userId",async (req,res) =>{
-  try {
-    const cart =await Cart.findOne ({userId: req.params.userId }).populate(
-    "products.productId",
-    "productname mrp shortdescription pic1 , discount"
-  );
-  if (cart == null){
-    return res.status(200).json (cart.products);
-  }
-  res.status(200).json(cart.products);
-  } catch(error){ 
-    res.status(500).json({ error:error.message});
-  }
-}); 
-// Remove product from  cart
-router.delete("/:userId/:productId",async(req, res)=>{
-try {
-    const cart =await Cart.findOne ({ userId:req.params.userId});
-    cart.products =cart.products.filter(
-    (p) => p.productId.string () !== req.params.productId    
-    );
-    await cart.save();
-    res.json({ mes : "data delete !"});
-}
-catch(error){
-    res. status(500).json({ error:error.message });
-}
 });
 
 
+
+
+
+
+let MyOrderSchema = mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user"
+    },
+    totalamount: {
+        type: String
+    },
+    address: {
+        name: {
+            type: String
+        },
+       
+        lastname: {
+            type: String
+        },
+        streetno: {
+            type: String
+        },
+        postalcode: {
+            type: String
+        },
+        number: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        country: {
+            type: String
+        },
+        paymentId: {
+            type: String
+        },
+        paymentstatus: {
+            type: String
+        },
+    }
+})
+let MyOrder = mongoose.model("MyOrder", MyOrderSchema)
+
+app.post("/api/orders/checkout", async (req, res) => {
+    try {
+        const { userId, address, totalamount } = req.body;
+        const newOrder = new MyOrder({
+            userId,
+            address,
+            totalamount,
+        }
+        )
+        await newOrder.save();
+        res.status(201).json({ success: true, order: newOrder });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message })
+    }
+}
+)
+app.put ("/api/orders/:orderId", async (req ,res) =>{
+    const { orderId } = req.params;
+    try {
+        const updateOrder = await MyOrder.findByIdAndUpdate(
+          orderId ,
+          {paymentId , paymentstatus },
+            {new :true}
+        );
+        res.status (200).json ({  mes : "okk"});
+    } catch (error){
+        res.status(500).json ({ message :" failed to update payment"});
+    }
+}
+)
+
+
+app.get("/api/MyOrder/:userId", async (req, res) => {
+    try {
+        const orders  = await MyOrder.find({ userId:req.params.userId })
+        res.json(orders);
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error :  error.message })
+    }
+})
 
 
 
