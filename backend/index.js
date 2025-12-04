@@ -5,7 +5,7 @@ let app = express()
 let bcrypt = require("bcrypt")
 let PORT = 4001
 app.use(cors({
-    origin: ["http://localhost:5173", "https://first-project-zdcw.vercel.app/"],
+    origin: ["http://localhost:5173", "https://first-project-zdcw.vercel.app"],
 }))
 app.use(express.json())
 
