@@ -4,7 +4,7 @@ import { BACKEND_API } from "../backendAPI";
 import { useContext } from "react";
 import { CartContext } from "../Context/CartContextProvider";
 function AllProduct() {
-   const  {addToCart} =   useContext(CartContext)
+    const { addToCart } = useContext(CartContext)
 
     let [ViewProduct, setViewProduct] = useState([])
     async function getProduct() {
@@ -17,8 +17,8 @@ function AllProduct() {
             console.log(error);
         }
     }
-  console.log(ViewProduct);
-  
+
+
     useEffect(() => {
         getProduct()
     }, [])
@@ -36,10 +36,10 @@ function AllProduct() {
                                 {c._id}
                                 <img src={c.imgPath} class="card-img-top img-hover" alt="..." />
                                 <div class="card-body">
-                                    <h5 class="card-title">{c.title}</h5>
+                                    <h5 class="card-title">{c.Itemname}</h5>
                                     <h6> PRIZE : {c.prize}</h6>
                                     <p class="card-text">{c.description}</p>
-                                    <button class="btn btn-primary text-center" onClick={()=>{ addToCart(c._id)}} >Add to cart </button>
+                                    <button class="btn btn-primary text-center" onClick={() => { addToCart(c._id) }} >Add to cart </button>
                                 </div>
                             </div>
                         )

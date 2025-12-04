@@ -45,9 +45,7 @@ function ViewProduct() {
                 <th>Img</th>
                 
                 <th>Itemname</th>
-              
-                
-            
+
              
               <th>prize</th>
                 <th>Active</th>

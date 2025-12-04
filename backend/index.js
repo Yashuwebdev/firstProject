@@ -529,14 +529,13 @@ let MyOrderSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "user"
     },
-    totalamount: {
+    totalAmount: {
         type: String
     },
     address: {
         name: {
             type: String
         },
-       
         lastname: {
             type: String
         },
@@ -555,23 +554,26 @@ let MyOrderSchema = mongoose.Schema({
         country: {
             type: String
         },
-        paymentId: {
-            type: String
-        },
-        paymentstatus: {
-            type: String
-        },
-    }
+
+    },
+    paymentId: {
+        type: String,
+        default: "null"
+    },
+    paymentstatus: {
+        type: String,
+        default: "null"
+    },
 })
 let MyOrder = mongoose.model("MyOrder", MyOrderSchema)
 
 app.post("/api/orders/checkout", async (req, res) => {
     try {
-        const { userId, address, totalamount } = req.body;
+        const { userId, address, totalAmount } = req.body;
         const newOrder = new MyOrder({
             userId,
             address,
-            totalamount,
+            totalAmount,
         }
         )
         await newOrder.save();
@@ -582,17 +584,19 @@ app.post("/api/orders/checkout", async (req, res) => {
     }
 }
 )
-app.put ("/api/orders/:orderId", async (req ,res) =>{
+app.put("/api/orders/:orderId", async (req, res) => {
     const { orderId } = req.params;
+    const { paymentId, paymentstatus } = req.body
     try {
         const updateOrder = await MyOrder.findByIdAndUpdate(
-          orderId ,
-          {paymentId , paymentstatus },
-            {new :true}
+            orderId,
+            { paymentId, paymentstatus },
+            { new: true }
         );
-        res.status (200).json ({  mes : "okk"});
-    } catch (error){
-        res.status(500).json ({ message :" failed to update payment"});
+        res.status(200).json({ mes: "okk" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: " failed to update payment" });
     }
 }
 )
@@ -600,13 +604,11 @@ app.put ("/api/orders/:orderId", async (req ,res) =>{
 
 app.get("/api/MyOrder/:userId", async (req, res) => {
     try {
-        const orders  = await MyOrder.find({ userId:req.params.userId })
+        const orders = await MyOrder.find({ userId: req.params.userId })
         res.json(orders);
-
-
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error :  error.message })
+        res.status(500).json({ error: error.message })
     }
 })
 

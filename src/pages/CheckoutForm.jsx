@@ -1,50 +1,10 @@
-import { useState, useEffect } from "react"
-import { BACKEND_API } from "../backendAPI";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+ import { BACKEND_API } from "../backendAPI";
+
 import axios from "axios";
-function Viewcart() {
-    let [Viewcart, setViewcart] = useState([])
-
-
-    async function getServices() {
-        let userId = localStorage.getItem("userId")
-        if (!userId) {
-            return
-        }
-        try {
-            let res = await fetch(`${BACKEND_API}/api/Viewcart/${userId}`);
-            let data = await res.json();
-            console.log(data);
-
-            setViewcart(data);
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
-    async function removeCart(productId) {
-        let userId = localStorage.getItem("userId")
-        try {
-            let res = await fetch(`${BACKEND_API}/api/Viewcart/${userId}/${productId}`, { method: "delete" });
-            let data = await res.json();
-            getServices()
-
-        }
-        catch (error) {
-            console.log(error);
-        }
-
-    }
-
-    useEffect(() => {
-        getServices()
-    }, [])
-
-    const totalAmount = Viewcart.reduce((total, val) => {
-        return total += val.productId?.prize * val.quantity
-    }, 0)
-
+function CheckoutForm () {
+    const [searchParams, setSearchParams] = useSearchParams();
     let [name, setName] = useState("")
     let [lastname, setLastname] = useState("")
     let [streetno, setStreetno] = useState("")
@@ -53,16 +13,17 @@ function Viewcart() {
     let [number, setNumber] = useState("")
     let [city, setCity] = useState("")
     let [country, setCountry] = useState("")
-    
-
+    let [floor, setFloor] = useState("")
+    let totalAmount = searchParams.get("price")
 
     const handlesubmit = async (e) => {
         e.preventDefault()
-        let userId = localStorage.getItem("userId")
+
+        let userId = localStorage.getItem("userid")
         if (userId) {
             try {
                 const res = await axios.post(
-                    `${BACKEND_API}/api/orders/checkout`,
+                    "${BACKEND_API}/api/orders/checkout",
                     {
                         userId,
                         address: { name, lastname, streetno, postalcode, state, number, city, country },
@@ -75,7 +36,7 @@ function Viewcart() {
                         amount: totalAmount * 100,
                         currency: "INR",
                         name: "e-book",
-                        description: "Order Payment ",
+                        description: " Order Payment ",
                         handler: async function (response) {
                             try {
                                 const paymentRes = await fetch(
@@ -85,11 +46,12 @@ function Viewcart() {
                                         headers: { "Content-Type": "application/json" },
                                         body: JSON.stringify({
                                             paymentId: response.razorpay_payment_id,
-                                            paymentstatus: "Paid",
+                                            paymentStatus: "Paid",
                                         })
                                     }
                                 );
                                 if (paymentRes.ok) {
+
                                     alert("payment Successfull!");
 
                                 } else {
@@ -123,53 +85,12 @@ function Viewcart() {
             alert("Plz login your acc!");
         }
     };
+
+    
+
+
     return (
         <>
-            <div className="container mt-4">
-                <h2 className="mb-4 text-center fw-bold">🛒 Your Cart</h2>
-
-                <div className="row">
-                    {Viewcart.map((item) => (
-                        <div className="col-md-6 col-lg-4 mb-4" key={item._id}>
-                            <div className="card shadow">
-                                <img
-                                    src={item.productId?.imgPath}
-                                    className="card-img-top"
-                                    alt={item.productId.Item}
-                                    style={{ height: "250px", objectFit: "cover" }}
-                                />
-
-                                <div className="card-body">
-                                    {/* <h4 className="card-title">{item.productId.title}</h4> */}
-                                    <p className="text-muted">{item.productId.description}</p>
-
-                                    <p className="fw-bold mb-1">
-                                        Price: ₹{item.productId.prize}
-                                    </p>
-
-                                    <p className="mb-3">
-                                        Quantity: <strong>{item.quantity}</strong>
-                                    </p>
-
-                                    <div className="d-flex">
-                                        <button onClick={() => {
-                                            removeCart(item.productId._id)
-                                        }} className="btn btn-danger btn-sm me-2 w-50">
-                                            Remove
-                                        </button>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    ))}
-    totalAmount = {totalAmount}
-
-                </div>
-            </div>
-
             <form onSubmit={handlesubmit} >
                 <div className="container bg-primary mt-5 mb-5 p-4">
                     <div className="row">
@@ -192,7 +113,7 @@ function Viewcart() {
                         <div className="col-md-4">
                             <input value={number} minLength={10} onChange={(e) => { setNumber(e.target.value) }} type="number" placeholder="Number" className="form-control " />
                         </div>
-
+                        
                     </div>
 
 
@@ -236,8 +157,7 @@ function Viewcart() {
 
             </form>
 
-
         </>
     )
 }
-export default Viewcart
+export default CheckoutForm

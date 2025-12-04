@@ -1,5 +1,5 @@
 import Home from "./pages/Home"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Form } from "react-router-dom"
 import Layout from "./pages/Layout"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
@@ -26,7 +26,9 @@ import ViewProduct from "./admin/ViewProduct"
 import AllProduct from "./pages/AllProduct"
 import CartContextProvider from "./Context/CartContextProvider"
 import Viewcart from "./admin/ViewCart"
-
+import You from "./pages/You"
+import CheckoutForm from "./pages/CheckoutForm"
+import MyOrder from "./pages/MyOrder"
 
 function App() {
 
@@ -45,13 +47,16 @@ function App() {
                             <Route path="Services" element={<Services></Services>}></Route>
                             <Route path="blog" element={<Blog></Blog>}></Route>
                             <Route path="viewcart" element={<Viewcart></Viewcart>}></Route>
-
+                            <Route path="You" element={<You></You>}></Route>
+                            <Route path="CheckoutForm" element={<CheckoutForm></CheckoutForm>}></Route>
                             <Route path="blog/:idx" element={<BlogDetails></BlogDetails>}></Route>
                             <Route path="Adminlogin" element={<Adminlogin></Adminlogin>}></Route>
                             <Route path="Signup" element={<Signup></Signup>}></Route>
                             <Route path="Login" element={<Login></Login>}></Route>
                             <Route path="Bookingpage" element={<Bookingpage></Bookingpage>}></Route>
                             <Route path="allproduct" element={<AllProduct/>}></Route>
+                            <Route path="MyOrder" element={<MyOrder></MyOrder>}></Route>
+
 
                         </Route>
 

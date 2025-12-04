@@ -16,7 +16,7 @@ function AddProduct() {
         }
         fetch(`${BACKEND_API}/api/AddProduct`, {
             method: "post",
-            body: JSON.stringify({ imgPath, title, prize,  description }),
+            body: JSON.stringify({ imgPath, Itemname, prize,  description }),
             headers: {
                 "content-type": "application/json",
             },

@@ -7,6 +7,7 @@ function CartContextProvider({ children }) {
     
     
     async function addToCart(productId) {
+        
         let  userId =   localStorage.getItem("userId")
 
         try {
@@ -17,8 +18,10 @@ function CartContextProvider({ children }) {
                     body: JSON.stringify({ userId, productId })
                 });
                 let data = await res.json();
+                console.log(data);
+                
                 alert("product Add !")
-                // fetchCartData()
+              
             } else {
                 alert("login your account !")
             }

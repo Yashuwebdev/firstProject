@@ -8,8 +8,10 @@
 //     console.log(count);   
 //   }
 // } , 100)
-<div>  
+{/* <div>  
   <img src="1.jpg"></img>
-</div>
-
+</div> */}
+let a=10
+a=30
+console.log (a);
 
